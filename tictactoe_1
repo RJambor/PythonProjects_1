@@ -1,0 +1,60 @@
+game = list(input('Enter cells: '))
+str_game = "".join(game)
+
+print('---------')
+print('| ' + " ".join(game[0:3]) + " |")
+print('| ' + " ".join(game[3:6]) + " |")
+print('| ' + " ".join(game[6:9]) + " |")
+print('---------')
+
+not_poss = False
+draw = False
+not_fin = False
+x_win = False
+o_win = False
+first_column = ""
+second_column = ""
+third_column = ""
+
+if str_game.count('_') == 0:
+    draw = True
+
+#if (str_game[0:3] == 'XXX' or str_game[3:6] == 'XXX' or str_game[6:9] == 'XXX'):
+#    not_fin = True
+    
+if str_game[0:3] == 'XXX' or str_game[3:6] == 'XXX' or str_game[6:9] == 'XXX':
+    x_win = True  
+
+if str_game[0:3] == 'OOO' or str_game[3:6] == 'OOO' or str_game[6:9] == 'OOO':
+    o_win = True  
+
+if str_game[0] + str_game[4] + str_game[8] == "XXX" or str_game[2] + str_game[4] + str_game[6] == "XXX":
+    x_win = True
+if str_game[2] + str_game[4] + str_game[6] == "OOO" or str_game[0] + str_game[4] + str_game[8] == "OOO":
+    o_win = True
+ 
+
+first_column = str_game[0] + str_game[3] + str_game[6]
+second_column = str_game[1] + str_game[4] + str_game[7]
+third_column = str_game[2] + str_game[5] + str_game[8]
+ 
+if first_column == "XXX" or second_column == "XXX" or third_column == "XXX":
+    x_win = True
+if first_column == "OOO" or second_column == "OOO" or third_column == "OOO":
+    o_win = True
+
+if (str_game.count('X') > (str_game.count('O') + 1)) or (str_game.count('O') > (str_game.count('X') + 1)):
+    not_poss = True
+elif x_win == True and o_win == True:
+    not_poss = True
+       
+if not_poss:
+    print('Impossible')
+elif x_win:
+    print('X wins')  
+elif o_win:
+    print('O wins') 
+elif draw:
+    print('Draw')
+else:
+    print('Game not finished')
